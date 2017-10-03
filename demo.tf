@@ -69,3 +69,10 @@ resource "aws_instance" "example" {
   subnet_id = "${aws_subnet.paywall-subnet.id}"
   depends_on = ["aws_internet_gateway.paywallgw"]
 }
+
+output "pub_ip" {
+  value = "${aws_instance.example.public_ip}"
+}
+output "pub_dns" {
+  value = "${aws_instance.example.public_dns}"
+}
