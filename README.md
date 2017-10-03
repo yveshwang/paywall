@@ -26,28 +26,33 @@ Note that the initial ec2 would not have `python` installed, and thus some of th
 ansible-playbook -i hosts provision.yml
 ```
 
-## Usage
+## Terraform usage
 
 `terraform.tfvars` holds variables which should be overriden with valid ones. Be sure to push it when its updated.
 
-### Plan
-
+To plan
 ```
 terraform plan -var-file terraform.tfvars
 ```
 
-### Apply
-
+To apply
 ```
 terraform apply -var-file terraform.tfvars
 ```
 
-### Destroy
-
+To destroy
 ```
 terraform destroy -var-file terraform.tfvars
 ```
 
-### Authors
+## Fastly setup
+Some manual (for now?) steps are required to setup Fastly.
+
+1. log into your Fastly account
+2. create a new DNS entry in Fastly, for example `fastly.test.gneis.io`
+3. grab the `r53` record entry, `paywall.test.gneis.io` and set that as the `host` to the aforementioned Fastly entry.
+4. Update our own CNAME record in `r53` to point `fastly.test.gneis.io` to say `nonssl.global.fastly.net`, since we are not dealing with any TLS backends here.
+
+## Authors
 Yves Hwang
 03.10.2018
