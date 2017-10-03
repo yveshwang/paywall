@@ -60,7 +60,7 @@ resource "aws_route_table_association" "paywall-rt-assoc" {
     route_table_id = "${aws_route_table.paywall-routetable.id}"
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "demo" {
   ami           = "ami-996372fd"
   associate_public_ip_address = "true"
   instance_type = "t2.micro"
@@ -71,8 +71,8 @@ resource "aws_instance" "example" {
 }
 
 output "pub_ip" {
-  value = "${aws_instance.example.public_ip}"
+  value = "${aws_instance.demo.public_ip}"
 }
 output "pub_dns" {
-  value = "${aws_instance.example.public_dns}"
+  value = "${aws_instance.demo.public_dns}"
 }
