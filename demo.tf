@@ -76,3 +76,11 @@ output "pub_ip" {
 output "pub_dns" {
   value = "${aws_instance.demo.public_dns}"
 }
+
+resource "aws_route53_record" "paywall-www" {
+  zone_id = "ZQVDZWEFRYX0Q"
+  name    = "paywall"
+  type    = "A"
+  ttl     = "300"
+  records = ["${aws_instance.demo.public_ip}"]
+}
