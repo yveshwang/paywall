@@ -6,6 +6,8 @@
     - name: 'install python-apt python3-apt aptitude'
       raw: sudo apt-get update; apt-get -y install python-apt python3-apt aptitude
   tasks:
-    - name: 'update cache'
+    - name: 'install nginx'
       apt:
+        name: nginx
+        state: latest
         update_cache: yes
