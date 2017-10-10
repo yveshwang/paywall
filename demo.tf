@@ -70,17 +70,20 @@ resource "aws_instance" "demo" {
   depends_on = ["aws_internet_gateway.paywallgw"]
 }
 
-output "pub_ip" {
-  value = "${aws_instance.demo.public_ip}"
-}
-output "pub_dns" {
-  value = "${aws_instance.demo.public_dns}"
-}
-
 resource "aws_route53_record" "paywall-www" {
   zone_id = "ZQVDZWEFRYX0Q"
   name    = "paywall"
   type    = "A"
   ttl     = "300"
   records = ["${aws_instance.demo.public_ip}"]
+}
+
+output "origin_pub_ip" {
+  value = "${aws_instance.demo.public_ip}"
+}
+output "origin_pub_aws_dns" {
+  value = "${aws_instance.demo.public_dns}"
+}
+output "origin_pub_dns" {
+  value = "${aws_route53_record.paywall-www.fqdn}"
 }

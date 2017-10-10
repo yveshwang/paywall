@@ -27,22 +27,19 @@ ansible-playbook -i hosts provision.yml
 ```
 
 ## Terraform usage
-
-`terraform.tfvars` holds variables which should be overriden with valid ones. Be sure to push it when its updated.
-
 To plan
 ```
-terraform plan -var-file terraform.tfvars
+terraform plan
 ```
 
 To apply
 ```
-terraform apply -var-file terraform.tfvars
+terraform apply
 ```
 
 To destroy
 ```
-terraform destroy -var-file terraform.tfvars
+terraform destroy
 ```
 
 ## Fastly setup
