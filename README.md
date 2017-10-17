@@ -26,6 +26,12 @@ Note that the initial ec2 would not have `python` installed, and thus some of th
 ansible-playbook -i hosts provision.yml
 ```
 
+Pull down any git submodule
+
+```
+git submodule update
+```
+
 ## Terraform usage
 To plan
 ```
@@ -41,6 +47,14 @@ To destroy
 ```
 terraform destroy
 ```
+## Cloudfront setup: AWS WAF
+There is a git submodule that sits within this repo that contains the AWS WAF, current this is a big pain in the bum to setup and it involves essentially pushing the `YAML` files as into `s3`, then provisioning it via the `aws cloudformation` tool by pointing it to S3. The tricky part here is that the built in bucket name can come into conflict with the script itself; not to mention that it takes ages to provision this.
+
+See https://github.com/awslabs/aws-waf-security-automations/issues/3
+
+Steps to get this to work is to instead use `aws console`, and then connect the WAF by hand to the `cloud formation` setup. See http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/template.html and for a clickable version, http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/deployment.html
+
+
 
 ## Fastly setup
 Some manual (for now?) steps are required to setup Fastly.
