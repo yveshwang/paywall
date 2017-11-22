@@ -4,6 +4,12 @@ This repo contains the terraform stuff to setup for evaluating Fastly paywall se
 
 Make sure you got the private key called `test_id_rsa_internal.pem` handy. Easiest is have `ssh-agent` running and add the key to it. The key here resides in our vault. Note also this demo is pointing to London `eu-west-2` region. Note that the Lambda@Edge must be in `us-east-1` at the time of writing.
 
+Note that replicated lambda on edge cannot be deleted. This is a huge pain in the ass. In addition, there are some issues with `terraform` when it comes to Lambdas. When getting stuck, trying rerunning `terraform apply` and at times, use some `terraform taint`.
+
+Note with lambda, often you have to perform this double `terraform apply` with the first updating the lambda hash, upload the zip file and publish a new version. Whilst the second apply will change the configuration on CF.
+
+Another thing to note is that CF is very slow. Currently there are no mock implementation of CF to verify the request/response structure and content to and from the origin.
+
 ## Getting started
 Get the plugin first if you haven't already.
 
@@ -66,4 +72,4 @@ Some manual (for now?) steps are required to setup Fastly.
 
 ## Authors
 Yves Hwang
-03.10.2018
+22.11.2018
