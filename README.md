@@ -1,6 +1,6 @@
-# paywall-fastly
+# paywall
 
-This repo contains the terraform stuff to setup for evaluating Fastly paywall setup. Unfortunately this is a demo setup, so no time is spent on doing a shared state and relying on `git` for now.
+This repo started off containing the terraform stuff to setup for evaluating Fastly paywall, however it has moved on as the home for the AWS Cloudfront based paywall. Unfortunately this is a demo setup, so no time is spent on doing a shared state and relying on `git` for now.
 
 Make sure you got the private key called `test_id_rsa_internal.pem` handy. Easiest is have `ssh-agent` running and add the key to it. The key here resides in our vault. Note also this demo is pointing to London `eu-west-2` region. Note that the Lambda@Edge must be in `us-east-1` at the time of writing.
 
@@ -61,20 +61,31 @@ See https://github.com/awslabs/aws-waf-security-automations/issues/3
 Steps to get this to work is to instead use `aws console`, and then connect the WAF by hand to the `cloud formation` setup. See http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/template.html and for a clickable version, http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/deployment.html
 
 ## Cloudfront limits
-Be aware of the limits, such as number of WAF rules and conditions. See 
+Be aware of the limits, such as number of WAF rules and conditions. See
 http://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 
 ## OWASP
-Since this is for the paywall, exmaples of how top 10 OWASP is mitigated.
+Since this is for the paywall, examples of how top 10 OWASP is mitigated.
 
-## Fastly setup
+  * SQLInjection - mitigated by WAF DONE
+  * Hijacked token - mitigated by using client.ip or geo location at least for the issued tokens as part of aud or sub or some other attributes. Can also support unique string of course. DONE
+  * Cross site scripting - mitigated by WAF DONE
+  * Path traversal, LFI, RFI - mitigated by WAF NOT APPLICABLE
+  * Privileged module access, say /admin should only come form office network - mitigated by WAF, needs explicit setup in WAF NOT APPLICABLE
+  * PHP specifics security config - NA NOT APPLICABLE
+  * Abnormal request via size restriction and sanitisation - mitigated by WAF IN PROGRESS
+  * CSRF token presence - not enforced. we use jsonwebtoken. we could do this for circlekid when it is plugged into the paywall. NOT APPLICABLE
+ * Serverside includes - request pattern for web root that should not be directly accessible - NA NOT APPLICABLE
+ * IP blacklist - we could populate a "reputation based" list, skip for now - NA NOT APPLICABLE
+
+## Fastly setup @deprecated
 Some manual (for now?) steps are required to setup Fastly.
 
-1. log into your Fastly account
-2. create a new DNS entry in Fastly, for example `fastly.test.gneis.io`
-3. grab the `r53` record entry, `paywall.test.gneis.io` and set that as the `host` to the aforementioned Fastly entry.
-4. Update our own CNAME record in `r53` to point `fastly.test.gneis.io` to say `nonssl.global.fastly.net`, since we are not dealing with any TLS backends here.
+  1. log into your Fastly account
+  2. create a new DNS entry in Fastly, for example `fastly.test.gneis.io`
+  3. grab the `r53` record entry, `paywall.test.gneis.io` and set that as the `host` to the aforementioned Fastly entry.
+  4. Update our own CNAME record in `r53` to point `fastly.test.gneis.io` to say `nonssl.global.fastly.net`, since we are not dealing with any TLS backends here.
 
 ## Authors
 Yves Hwang
-22.11.2018
+18.12.2018
