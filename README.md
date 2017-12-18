@@ -60,7 +60,12 @@ See https://github.com/awslabs/aws-waf-security-automations/issues/3
 
 Steps to get this to work is to instead use `aws console`, and then connect the WAF by hand to the `cloud formation` setup. See http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/template.html and for a clickable version, http://docs.aws.amazon.com/solutions/latest/aws-waf-security-automations/deployment.html
 
+## Cloudfront limits
+Be aware of the limits, such as number of WAF rules and conditions. See 
+http://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 
+## OWASP
+Since this is for the paywall, exmaples of how top 10 OWASP is mitigated.
 
 ## Fastly setup
 Some manual (for now?) steps are required to setup Fastly.
