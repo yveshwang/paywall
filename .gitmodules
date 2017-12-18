@@ -1,3 +1,0 @@
-[submodule "aws-waf-security-automations"]
-	path = aws-waf-security-automations
-	url = git@github.com:awslabs/aws-waf-security-automations.git
