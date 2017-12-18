@@ -2,6 +2,8 @@
 
 This repo started off containing the terraform stuff to setup for evaluating Fastly paywall, however it has moved on as the home for the AWS Cloudfront based paywall. Unfortunately this is a demo setup, so no time is spent on doing a shared state and relying on `git` for now.
 
+The edge side token is written in to `lambda@edge` in [token-verification-lambda-edge][https://github.com/yveshwang/token-verification-lambda-edge/] module. Check out the [readme][https://github.com/yveshwang/token-verification-lambda-edge] there for more info. It is written in `node.js`.
+
 Make sure you got the private key called `test_id_rsa_internal.pem` handy. Easiest is have `ssh-agent` running and add the key to it. The key here resides in our vault. Note also this demo is pointing to London `eu-west-2` region. Note that the Lambda@Edge must be in `us-east-1` at the time of writing.
 
 Note that replicated lambda on edge cannot be deleted. This is a huge pain in the ass. In addition, there are some issues with `terraform` when it comes to Lambdas. When getting stuck, trying rerunning `terraform apply` and at times, use some `terraform taint`.
@@ -10,9 +12,27 @@ Note with lambda, often you have to perform this double `terraform apply` with t
 
 Another thing to note is that CF is very slow. Currently there are no mock implementation of CF to verify the request/response structure and content to and from the origin.
 
-## Getting started
-Get the plugin first if you haven't already.
+## Getting started - lambda@edge
+Get the plugin first if you haven't already. Be sure you have some kind of `node.js v6.10.3` env ready.
 
+Get submodule(s) first. And if it your first time, do
+
+```
+git submodule init
+```
+
+then grab the lambda.zip file...
+
+```
+git submodule update --recursive --remote
+cd token-verification-lambda-edge/
+npm run-script dist
+cd ..
+cp token-verification-lambda-edge/lambda.zip .
+```
+
+## Getting started - infra with terraform
+Build paywall infra
 ```
 terraform get
 ```
