@@ -2,7 +2,7 @@
 
 This repo started off containing the terraform stuff to setup for evaluating Fastly paywall, however it has moved on as the home for the AWS Cloudfront based paywall. Unfortunately this is a demo setup, so no time is spent on doing a shared state and relying on `git` for now.
 
-The edge side token is written in to `lambda@edge` in [token-verification-lambda-edge][https://github.com/yveshwang/token-verification-lambda-edge/] module. Check out the [readme][https://github.com/yveshwang/token-verification-lambda-edge] there for more info. It is written in `node.js`.
+The edge side token is written in to `lambda@edge` in [token-verification-lambda-edge](https://github.com/yveshwang/token-verification-lambda-edge/) module. Check out the [readme](https://github.com/yveshwang/token-verification-lambda-edge) there for more info. It is written in `node.js`.
 
 Make sure you got the private key called `test_id_rsa_internal.pem` handy. Easiest is have `ssh-agent` running and add the key to it. The key here resides in our vault. Note also this demo is pointing to London `eu-west-2` region. Note that the Lambda@Edge must be in `us-east-1` at the time of writing.
 
