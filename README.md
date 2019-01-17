@@ -98,14 +98,6 @@ Since this is for the paywall, examples of how top 10 OWASP is mitigated.
   * Serverside includes - request pattern for web root that should not be directly accessible - NA NOT APPLICABLE
  * IP blacklist - we could populate a "reputation based" list, skip for now - NA NOT APPLICABLE
 
-## Fastly setup @deprecated
-Some manual (for now?) steps are required to setup Fastly.
-
-  1. log into your Fastly account
-  2. create a new DNS entry in Fastly, for example `fastly.test.gneis.io`
-  3. grab the `r53` record entry, `paywall.test.gneis.io` and set that as the `host` to the aforementioned Fastly entry.
-  4. Update our own CNAME record in `r53` to point `fastly.test.gneis.io` to say `nonssl.global.fastly.net`, since we are not dealing with any TLS backends here.
-
 ## Authors
 Yves Hwang
-18.12.2018
+17.01.2019
