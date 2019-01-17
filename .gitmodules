@@ -1,3 +1,3 @@
 [submodule "token-verification-lambda-edge"]
 	path = token-verification-lambda-edge
-	url = git@github.com:statoilfuelretail/token-verification-lambda-edge.git 
+	url = git@github.com:yveshwang/token-verification-lambda-edge.git 
