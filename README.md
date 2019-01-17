@@ -94,8 +94,8 @@ Since this is for the paywall, examples of how top 10 OWASP is mitigated.
   * Privileged module access, say /admin should only come form office network - mitigated by WAF, needs explicit setup in WAF NOT APPLICABLE
   * PHP specifics security config - NA NOT APPLICABLE
   * Abnormal request via size restriction and sanitisation - mitigated by WAF IN PROGRESS
-  * CSRF token presence - not enforced. we use jsonwebtoken. we could do this for circlekid when it is plugged into the paywall. NOT APPLICABLE
- * Serverside includes - request pattern for web root that should not be directly accessible - NA NOT APPLICABLE
+  * CSRF token presence - not enforced. we use jsonwebtoken.
+  * Serverside includes - request pattern for web root that should not be directly accessible - NA NOT APPLICABLE
  * IP blacklist - we could populate a "reputation based" list, skip for now - NA NOT APPLICABLE
 
 ## Fastly setup @deprecated
